@@ -1,18 +1,11 @@
 import { acceptHMRUpdate, defineStore } from 'pinia'
 
 export const useBlogStore = defineStore('blog', () => {
-  const blogList = ref([])
-
-  const initBlogList = () => {
-    // TODO
-    blogList.value = []
-  }
-
+  const count = ref(0)
   return {
-    blogList,
-    initBlogList,
+    count,
   }
 })
 
 if (import.meta.hot)
-  import.meta.hot.accept(acceptHMRUpdate(useUserStore, import.meta.hot))
+  import.meta.hot.accept(acceptHMRUpdate(useBlogStore, import.meta.hot))
