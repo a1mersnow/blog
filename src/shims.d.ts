@@ -21,9 +21,9 @@ declare module '~blogs' {
 }
 
 interface Blog {
-  title: string,
-  date: string,
-  tags: string[],
-  url: string,
-  id: string,
+  title: string
+  date: string
+  tags: string[]
+  url: string
+  id: string
 }

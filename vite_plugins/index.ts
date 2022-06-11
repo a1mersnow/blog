@@ -1,25 +1,25 @@
-import { ModuleNode, ViteDevServer } from "vite"
-import { generateIndex } from "../src/utils/generate-index"
+import type { ModuleNode, ViteDevServer } from 'vite'
 import Debug from 'debug'
+import { generateIndex } from '../src/utils/generate-index'
 
 const debug = Debug('vite-plugin-index-blog')
 const MODULE_ID_VIRTUAL = '/@vite-plugin-index-blog/blog-list'
 
-export default function indexBlog () {
+export default function indexBlog() {
   return {
     name: 'vite-plugin-index-blog',
     enforce: 'pre',
     resolveId(id: string) {
-      if (id === '~blogs') {
-        return `/@vite-plugin-index-blog/blog-list`
-      }
+      if (id === '~blogs')
+        return '/@vite-plugin-index-blog/blog-list'
+
       return null
     },
     load(id: string) {
       if (id.startsWith(MODULE_ID_VIRTUAL)) {
         return {
           code: `export default ${JSON.stringify(generateIndex())}`,
-          map: null
+          map: null,
         }
       }
       return null
@@ -27,14 +27,6 @@ export default function indexBlog () {
     configureServer(server: ViteDevServer) {
       const watcher = server.watcher
       const slash = (str: string) => str.replace(/\\/g, '/')
-
-      const regenerateIfNeeded = (path: string) => {
-        path = slash(path)
-        if (!path.includes('/blogs/')) {
-          return
-        }
-        regenerate()
-      }
 
       const invalidatePagesModule = () => {
         const { moduleGraph } = server
@@ -55,9 +47,17 @@ export default function indexBlog () {
         })
       }
 
+      const regenerateIfNeeded = (path: string) => {
+        path = slash(path)
+        if (!path.includes('/blogs/'))
+          return
+
+        regenerate()
+      }
+
       watcher.on('unlink', regenerateIfNeeded)
       watcher.on('add', regenerateIfNeeded)
       watcher.on('change', regenerateIfNeeded)
-    }
+    },
   }
 }

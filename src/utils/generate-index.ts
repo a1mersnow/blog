@@ -7,7 +7,7 @@ const postsDirectory = path.resolve(__dirname, '../pages/blogs')
 
 export const generateIndex = () => {
   // Get file names under /posts
-  const fileNames = fs.readdirSync(postsDirectory);
+  const fileNames = fs.readdirSync(postsDirectory)
   const allPostsData = fileNames.map((fileName) => {
     // Remove ".md" from file name to get id
     const id = fileName.replace(/\.md$/, '')
@@ -25,17 +25,15 @@ export const generateIndex = () => {
       ...matterResult.data,
       date: dayjs(matterResult.data.date).format('YYYY-MM-DD'),
       tags: matterResult.data.tags ? matterResult.data.tags.split(',') : [],
-    };
+    }
   })
   // Sort posts by date
-  // @ts-ignore
   return allPostsData.sort(({ date: a }, { date: b }) => {
-    if (a < b) {
-      return 1;
-    } else if (a > b) {
-      return -1;
-    } else {
-      return 0;
-    }
-  });
+    if (a < b)
+      return 1
+    else if (a > b)
+      return -1
+    else
+      return 0
+  })
 }
