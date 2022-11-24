@@ -11,7 +11,7 @@ export default function indexBlog() {
     enforce: 'pre',
     resolveId(id: string) {
       if (id === '~blogs')
-        return '/@vite-plugin-index-blog/blog-list'
+        return MODULE_ID_VIRTUAL
 
       return null
     },

@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import banner from '~/assets/banner.png'
+import sun from '~/assets/sun.jpeg'
 import blogList from '~blogs'
 
 const route = useRoute()
-const tagCurr = $computed(() => route.params.tag as string)
+const tagCurr = $computed(() => route.query.tag as string)
 
 const tags = computed<string[]>(() => {
   const set = new Set<string>()
@@ -21,6 +22,7 @@ const tags = computed<string[]>(() => {
 const list = computed(() => {
   if (tagCurr)
     return blogList.filter(x => x.tags.includes(tagCurr))
+
   else
     return blogList
 })
@@ -30,9 +32,12 @@ function handleClickPost(blog: Blog) {
   router.push(`/blogs/${blog.id}`)
 }
 
-function handleClickTag(tag: string) {
+function handleClickTag(tag = '') {
   router.push(`/?tag=${tag}`)
 }
+
+const EMAIL = 'onlylovesnow14@gmail.com'
+const GITHUB = 'https://github.com/a1mersnow'
 </script>
 
 <template>
@@ -60,20 +65,37 @@ function handleClickTag(tag: string) {
           </div>
         </li>
       </ul>
-      <div class="bg-gray text-white p-4 -mx-4 mt-4 lg:(rounded mx-0 mt-0)">
-        <h2 class="text-xl">
-          标签
-        </h2>
-        <div class="flex space-x-3 pt-3">
-          <div
-            v-for="tag in tags" :key="tag"
-            class="cursor-pointer underline text-sm"
-            @click="handleClickTag(tag)"
-          >
-            {{ tag }}
+      <aside>
+        <div
+          class="bg-gray text-white p-4 -mx-4 mt-4 lg:(rounded mx-0 mt-0) bg-no-repeat bg-center bg-cover bg-blend-multiply"
+          :style="{
+            backgroundImage: `url(${sun})`,
+          }"
+        >
+          <h2 class="text-xl flex items-center">
+            标签
+            <button
+              v-if="tagCurr" class="i-carbon-ai-status-failed text-sm ml-1 hover:text-gray-300 transition"
+              @click="handleClickTag()"
+            />
+          </h2>
+          <div class="flex space-x-3 pt-3 min-h-80">
+            <div
+              v-for="tag in tags" :key="tag"
+              class="cursor-pointer text-sm px-1 transition"
+              :class="tag === tagCurr ? 'bg-white text-gray rounded-sm' : 'underline'"
+              @click="handleClickTag(tag)"
+            >
+              {{ tag }}
+            </div>
           </div>
+
+          <footer class="text-xs text-gray-200 pt-6 leading-6">
+            <a class="block">Email: {{ EMAIL }}</a>
+            <a class="block" :href="GITHUB" target="_blank">Github: {{ GITHUB }}</a>
+          </footer>
         </div>
-      </div>
+      </aside>
     </div>
   </div>
 </template>
