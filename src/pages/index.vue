@@ -55,7 +55,7 @@ function handleClickTag(tag: string) {
           <div class="flex-1 min-w-0 text-ellipsis overflow-hidden whitespace-nowrap pr-4">
             {{ blog.title }}
           </div>
-          <div class="text-gray flex-shrink-0">
+          <div class="text-gray flex-shrink-0 tabular-nums">
             {{ blog.date }}
           </div>
         </li>
