@@ -16,7 +16,7 @@ const tags = computed<string[]>(() => {
       }
     }
   }
-  return [...set]
+  return [...set, '胡说八道', '胡说八道', '胡说八道', '胡说八道', '胡说八道']
 })
 
 const list = computed(() => {
@@ -79,10 +79,10 @@ const GITHUB = 'https://github.com/a1mersnow'
               @click="handleClickTag()"
             />
           </h2>
-          <div class="flex space-x-3 pt-3 min-h-80">
+          <div class="flex items-start flex-wrap content-start pt-3 min-h-80">
             <div
               v-for="tag in tags" :key="tag"
-              class="cursor-pointer text-sm px-1 transition"
+              class="cursor-pointer text-sm px-1 transition mr-3 mb-2"
               :class="tag === tagCurr ? 'bg-white text-gray rounded-sm' : 'underline'"
               @click="handleClickTag(tag)"
             >
