@@ -16,7 +16,7 @@ const tags = computed<string[]>(() => {
       }
     }
   }
-  return [...set, '胡说八道', '胡说八道', '胡说八道', '胡说八道', '胡说八道']
+  return [...set]
 })
 
 const list = computed(() => {
