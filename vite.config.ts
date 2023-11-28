@@ -1,4 +1,4 @@
-import path from 'path'
+import path from 'node:path'
 import { defineConfig } from 'vite'
 import Vue from '@vitejs/plugin-vue'
 import Pages from 'vite-plugin-pages'
@@ -26,7 +26,10 @@ export default defineConfig({
   plugins: [
     Vue({
       include: [/\.vue$/, /\.md$/],
-      reactivityTransform: true,
+      script: {
+        defineModel: true,
+        propsDestructure: true,
+      },
     }),
 
     // https://github.com/hannoeru/vite-plugin-pages
@@ -43,7 +46,6 @@ export default defineConfig({
         'vue',
         'vue-router',
         'vue-i18n',
-        'vue/macros',
         '@vueuse/head',
         '@vueuse/core',
       ],
@@ -62,6 +64,9 @@ export default defineConfig({
       // allow auto import and register components used in markdown
       include: [/\.vue$/, /\.vue\?vue/, /\.md$/],
       dts: 'src/components.d.ts',
+      dirs: [
+        'src/components',
+      ],
     }),
 
     // https://github.com/antfu/unocss
