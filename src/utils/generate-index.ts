@@ -5,7 +5,7 @@ import dayjs from 'dayjs'
 
 const postsDirectory = path.resolve(__dirname, '../pages/blogs')
 
-export const generateIndex = () => {
+export function generateIndex() {
   // Get file names under /posts
   const fileNames = fs.readdirSync(postsDirectory)
   const allPostsData = fileNames.map((fileName) => {
