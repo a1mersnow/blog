@@ -5,5 +5,7 @@
     </router-link>
     <TheToolbox />
   </div>
-  <RouterView class="text-gray-600 dark:text-gray" />
+  <div class="grid grid-cols-[minmax(1rem,auto)_1fr_minmax(1rem,auto)]">
+    <RouterView class="text-gray-600 dark:text-gray col-start-2" />
+  </div>
 </template>

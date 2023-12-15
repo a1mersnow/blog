@@ -23,7 +23,7 @@ function handleClickPost(blog: Blog) {
   <div>
     <TheNav :banner="banner" />
 
-    <div class="max-w-1200px mx-auto p-4 lg:(grid grid-cols-[2fr_1fr] gap-8)">
+    <div class="max-w-1200px mx-auto p-4 pb-0 lg:pb-4 lg:(grid grid-cols-[2fr_1fr] gap-8)">
       <ul class="prose text-base prose-stone">
         <li
           v-for="blog in list" :key="blog.id" class="p-2 flex items-center cursor-pointer transition duration-300 rounded text-gray hover:(text-blue-700 bg-blue-100)"
